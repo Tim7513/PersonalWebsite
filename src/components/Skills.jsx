@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaReact, FaJs, FaHtml5, FaNodeJs, FaPython, FaGitAlt, FaDocker, FaAws, FaFigma } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiNextdotjs, SiExpress, SiMongodb, SiPostgresql, SiFirebase, SiVisualstudio, SiPostman } from 'react-icons/si';
+import { SiTypescript, SiTailwindcss, SiNextdotjs } from 'react-icons/si';
 import { skills } from '../data';
 
 const Skills = () => {
@@ -13,22 +13,28 @@ const Skills = () => {
     SiNextdotjs: SiNextdotjs,
     FaNodeJs: FaNodeJs,
     FaPython: FaPython,
-    SiExpress: SiExpress,
-    SiMongodb: SiMongodb,
-    SiPostgresql: SiPostgresql,
-    SiFirebase: SiFirebase,
     FaGitAlt: FaGitAlt,
     FaDocker: FaDocker,
     FaAws: FaAws,
     FaFigma: FaFigma,
-    SiVisualstudiocode: SiVisualstudio,
-    SiPostman: SiPostman,
   };
 
   const skillCategories = [
-    { name: 'Frontend', skills: skills.frontend, color: 'bg-gradient-to-r from-blue-500 to-cyan-500' },
-    { name: 'Backend', skills: skills.backend, color: 'bg-gradient-to-r from-green-500 to-emerald-500' },
-    { name: 'Tools', skills: skills.tools, color: 'bg-gradient-to-r from-purple-500 to-pink-500' },
+    { 
+      name: 'Frontend', 
+      skills: skills.frontend.filter(skill => iconMap[skill.icon]), 
+      colorClass: 'from-blue-500 to-cyan-500' 
+    },
+    { 
+      name: 'Backend', 
+      skills: skills.backend.filter(skill => iconMap[skill.icon]), 
+      colorClass: 'from-green-500 to-emerald-500' 
+    },
+    { 
+      name: 'Tools', 
+      skills: skills.tools.filter(skill => iconMap[skill.icon]), 
+      colorClass: 'from-purple-500 to-pink-500' 
+    },
   ];
 
   return (
@@ -55,7 +61,7 @@ const Skills = () => {
               viewport={{ once: true }}
               className="card p-8"
             >
-              <h3 className={`text-2xl font-bold mb-6 bg-gradient-to-r ${category.color.replace('bg-gradient-to-r ', '')} bg-clip-text text-transparent`}>
+              <h3 className={`text-2xl font-bold mb-6 bg-gradient-to-r ${category.colorClass} bg-clip-text text-transparent`}>
                 {category.name}
               </h3>
               <div className="space-y-4">
@@ -84,7 +90,7 @@ const Skills = () => {
                             whileInView={{ width: `${skill.level}%` }}
                             transition={{ duration: 1, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className={`h-2 rounded-full ${category.color}`}
+                            className={`h-2 rounded-full bg-gradient-to-r ${category.colorClass}`}
                           ></motion.div>
                         </div>
                       </div>
